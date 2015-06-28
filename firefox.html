@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Knowledge Base / Firefox Tips</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="static/classy.css" type="text/css">
+<link rel="stylesheet" href="static/tomorrow-night-eighties.css">
+<script src="static/highlight-8.6.min.js"></script>
+</head>
+<body>
+
+
+<h1 id="Firefox-Tips">Firefox Tips</h1>
+
+<h2 id="Privacy">Privacy</h2>
+
+<p>Mozilla is not a non-profit organization anymore. The good old days are over.</p>
+
+<h3 id="Google-Safe-Browsing">Google Safe Browsing</h3>
+
+<p>Malware detection is useless on Linux anyway.</p>
+
+<pre><code>  browser.safebrowsing.enabled
+  browser.safebrowsing.downloads.enabled
+  browser.safebrowsing.malware.enabled</code></pre>
+
+<h3 id="Statistics-and-health-reports">Statistics and health reports</h3>
+
+<p>Collected by Mozilla. Like if bug reports were not enough.</p>
+
+<pre><code>  datareporting.healthreport.service.enabled
+  datareporting.healthreport.uploadEnabled
+  toolkit.telemetry.enabled</code></pre>
+
+<h3 id="WebRTC">WebRTC</h3>
+
+<p>Leaks your private IP (<a href="https://github.com/diafygi/webrtc-ips">source</a>).</p>
+
+<pre><code>  media.peerconnection.enabled</code></pre>
+
+<h3 id="DRM">DRM</h3>
+
+<p>Firefox uses a binary blob to play medias encrypted with DRM.</p>
+
+<pre><code>  media.eme.enabled
+  media.gmp-eme-adobe.enabled</code></pre>
+
+<h3 id="Hello">Hello</h3>
+
+<p>Connects to Telefonica.</p>
+
+<pre><code>  loop.enabled</code></pre>
+
+<h3 id="Pocket">Pocket</h3>
+
+<p>We have bookmarks for that.</p>
+
+<pre><code>  browser.pocket.enabled</code></pre>
+
+<h3 id="Geolocation">Geolocation</h3>
+
+<p>Your IP is enough.</p>
+
+<pre><code>  geo.enabled</code></pre>
+
+<h3 id="Tracking-Protection"><b>Tracking Protection</b></h3>
+
+<p>This will block sites which are known to track users. As a side effect, it makes pages load faster!</p>
+
+<pre><code>  privacy.trackingprotection.enabled</code></pre>
+
+<h2 id="Performance">Performance</h2>
+
+<h3 id="Choppy-scrolling">Choppy scrolling</h3>
+
+<p>Enabling this option increases animation speed which reduces scrolling lags.</p>
+
+<pre><code>  layout.frame_rate.precise</code></pre>
+
+<p>Also, if your mouse scrolls too slowly, raise this option to a value like 40.</p>
+
+<pre><code>  mousewheel.min_line_scroll_amount</code></pre>
+
+<h3 id="Session-history">Session history</h3>
+
+<p>By default, each opened tab will keep its own history of the last <b>50</b> visited pages. This is too much. Set it to 10 or 15.</p>
+
+<pre><code>  browser.sessionhistory.max_entries</code></pre>
+
+<h2 id="Extensions">Extensions</h2>
+
+<p>My favorite ones:</p>
+
+<ul>
+
+<li><p>uBlock Origin</p>
+
+</li>
+<li><p>HTTPS-Everywhere</p>
+
+</li>
+<li><p>FireGestures</p>
+
+</li>
+<li><p>Live HTTP headers</p>
+
+</li>
+<li><p>Remove Google Tracking</p>
+
+</li>
+<li><p>Youtube Enhancer Plus</p>
+
+</li>
+<li><p>JSONView</p>
+
+</li>
+</ul>
+
+
+<div id="footer">
+	<a href="./" alt="Back to Index"><i>Back to Index</i></a>
+</div>
+<script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>
+

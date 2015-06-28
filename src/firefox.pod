@@ -1,0 +1,114 @@
+=head1 Firefox Tips
+
+=head2 Privacy
+
+Mozilla is not a non-profit organization anymore. The good old days are over.
+
+=head3 Google Safe Browsing
+
+Malware detection is useless on Linux anyway.
+
+  browser.safebrowsing.enabled
+  browser.safebrowsing.downloads.enabled
+  browser.safebrowsing.malware.enabled
+
+=head3 Statistics and health reports
+
+Collected by Mozilla. Like if bug reports were not enough.
+
+  datareporting.healthreport.service.enabled
+  datareporting.healthreport.uploadEnabled
+  toolkit.telemetry.enabled
+
+=head3 WebRTC
+
+Leaks your private IP (L<source|https://github.com/diafygi/webrtc-ips>).
+
+  media.peerconnection.enabled
+
+=head3 DRM
+
+Firefox uses a binary blob to play medias encrypted with DRM.
+
+  media.eme.enabled
+  media.gmp-eme-adobe.enabled
+
+=head3 Hello
+
+Connects to Telefonica.
+
+  loop.enabled
+
+=head3 Pocket
+
+We have bookmarks for that.
+
+  browser.pocket.enabled
+
+=head3 Geolocation
+
+Your IP is enough.
+
+  geo.enabled
+
+=head3 B<Tracking Protection>
+
+This will block sites which are known to track users. As a side effect, it
+makes pages load faster!
+
+  privacy.trackingprotection.enabled
+
+=head2 Performance
+
+=head3 Choppy scrolling
+
+Enabling this option increases animation speed which reduces scrolling lags.
+
+  layout.frame_rate.precise
+
+Also, if your mouse scrolls too slowly, raise this option to a value like 40.
+
+  mousewheel.min_line_scroll_amount
+
+=head3 Session history
+
+By default, each opened tab will keep its own history of the last B<50> visited
+pages. This is too much. Set it to 10 or 15.
+
+  browser.sessionhistory.max_entries
+
+=head2 Extensions
+
+My favorite ones:
+
+=over 4
+
+=item
+
+uBlock Origin
+
+=item
+
+HTTPS-Everywhere
+
+=item
+
+FireGestures
+
+=item
+
+Live HTTP headers
+
+=item
+
+Remove Google Tracking
+
+=item
+
+Youtube Enhancer Plus
+
+=item
+
+JSONView
+
+=back

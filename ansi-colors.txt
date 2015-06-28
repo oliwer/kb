@@ -1,0 +1,71 @@
+Article #58193 (59137 is last):
+From: clafave@teleport.com (Chris LaFave)
+Newsgroups: alt.2600
+Subject: ^_^[[1;37;41mANSI codes^_^[[0m
+Date: Sat Feb 11 20:34:18 1995
+
+Here is how to put ANSI codes in news article subject lines.
+This is the format for ansi codes:
+[A;B;Cm
+
+A=text attributes
+0 all attributes off
+1 bold
+5 blinking
+7 reverse
+8 hidden
+
+B=foreground                 C=background
+Foreground colors            Background colors
+30 black   34 blue           40 black   44 blue
+31 red     35 magenta        41 red     45 magenta
+32 green   36 cyan           42 green   46 cyan
+33 yellow  37 white          43 yellow  47 white
+Shown 29%, press <SPACE> for more, 'q' to quit, or 'h' for helpArticle #58193 (59137 is last):
+From: clafave@teleport.com (Chris LaFave)
+Newsgroups: alt.2600
+Subject: ANSI codes
+Date: Sat Feb 11 20:34:18 1995
+
+Here is how to put ANSI codes in news article subject lines.
+This is the format for ansi codes:
+[A;B;Cm
+
+A=text attributes
+0 all attributes off
+1 bold
+5 blinking
+7 reverse
+8 hidden
+
+B=foreground                 C=background
+Foreground colors            Background colors
+30 black   34 blue           40 black   44 blue
+31 red     35 magenta        41 red     45 magenta
+32 green   36 cyan           42 green   46 cyan
+33 yellow  37 white          43 yellow  47 white
+
+Before the [A;B;Cm you need an escape prefix. You can type it in each time
+you need it. I only know how to make the escape prefix using vi. It is 4
+characters. They are ^v ^_ ^v ^[ (the ^ means the control key). To save
+typing you can put this prefix in a file and paste it when needed. Using
+Pico this is done using "^r". Here's an example of a flashing white
+"hello" on a red background: ^v^_^v^[[5;37;41mhello^v^_^v^[[0m. On the
+right side of the sequence the "[0m" resets the colors so the rest of the
+screen doesn't blink white on red. All ansi sequences ( like [1;37;41m or
+[0m ) need to be preceded by the escape prefix. When posting an article
+and you are prompted for a subject you can type just anything. When you are
+then in edit mode you go to the subject line and erase whatever you just
+typed in and replace it with your ansi text. The escape prefix must be typed
+in using vi. You can create it using vi and put in a file and then paste it
+using whatever editor you want.
+
+_____  ___       ________          ______
+ ___ \ \  |   /\ \   ___ \  /\/\   \ \ __*********************************
+ \  \/ |  |  |  \ \  \  \/ /  | \  / /<_ Chris LaFave clafave@teleport.com
+  \  __|  |  | > \ \  \__ / < |  \/ /___> ftp.teleport.com /users/clafave/
+   \/  \  \__|    \|   _//    |    / \___ http://www.teleport.com/~clafave
+\      /     \     \  | /     |\  /\     Beaverton Oregon USA  GO BLAZERS!
+ \____/|_____/__|\_/__| \_/|__| \/  \____*********************************
+
+Enter Command:

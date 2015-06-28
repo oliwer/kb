@@ -1,0 +1,17 @@
+=head1 A quick perl example
+
+  sub find_ext {
+    my $filename = shift;
+
+    my ($ext) = $filename =~ /\.([a-zA-Z0-9]+)$/;
+    return undef unless $ext;
+
+    # Is this a supported file format?
+    if ($ext =~ /^txt|pod|html$/i) {
+      return lc($ext);
+    }
+
+    return undef;
+  }
+
+END

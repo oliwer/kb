@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Knowledge Base / A quick perl example</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="static/classy.css" type="text/css">
+<link rel="stylesheet" href="static/tomorrow-night-eighties.css">
+<script src="static/highlight-8.6.min.js"></script>
+</head>
+<body>
+
+
+<h1 id="A-quick-perl-example">A quick perl example</h1>
+
+<pre><code>  sub find_ext {
+    my $filename = shift;
+
+    my ($ext) = $filename =~ /\.([a-zA-Z0-9]+)$/;
+    return undef unless $ext;
+
+    # Is this a supported file format?
+    if ($ext =~ /^txt|pod|html$/i) {
+      return lc($ext);
+    }
+
+    return undef;
+  }</code></pre>
+
+<p>END</p>
+
+
+<div id="footer">
+	<a href="./" alt="Back to Index"><i>Back to Index</i></a>
+</div>
+<script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>
+

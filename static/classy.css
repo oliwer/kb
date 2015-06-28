@@ -1,0 +1,53 @@
+html {
+	background-color: #222;
+	color: silver;
+	margin-top: 2em;
+	padding-bottom: 4em;
+	margin-left: 10em;
+	margin-right: 10em;
+	font-family: Arial, sans-serif;
+}
+h2 {
+	padding-top: 4%;
+}
+h3 {
+	padding-top: 2%;
+}
+a {
+	color: #00C6CD;
+}
+a:visited {
+	color: #00C6CD;
+}
+a:hover {
+	color: white;
+	text-decoration: none;
+}
+li {
+	margin-top: 0.8em;
+	margin-bottom: 0.8em;
+	list-style-type: square;
+}
+#banner {
+	width: 50%;
+	font-size: 250%;
+	background-color: red;
+	color: white;
+	cursor: default;
+	padding: 2%;
+	/* for hippies */
+	transition-property:color, text, background;
+	transition-duration:0.5s;
+	transition-timing-function: linear, ease-in;
+}
+#banner:hover {
+	background-color: white;
+	color: red;
+}
+#footer {
+	display: block;
+	position: relative;
+	top: 1.5em;
+	border-top: 1px solid white;
+	padding-top: 0.5em;
+}
