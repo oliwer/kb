@@ -58,6 +58,21 @@ makes pages load faster!
 
   privacy.trackingprotection.enabled
 
+=head3 1024-bit Diffie-Hellman
+
+Research suggests that the NSA has developed the capability to decrypt
+a large number of HTTPS, SSH, and VPN connections using an attack on
+common implementations of the Diffie-Hellman key exchange algorithm
+with 1024-bit primes.
+
+The following options should be set to "false".
+
+  security.ssl3.dhe_rsa_aes_128_sha
+  security.ssl3.dhe_rsa_aes_256_sha
+
+The EFF has set up a website to test your browser TLS configuration:
+L<How's My SSL|https://www.howsmyssl.com>
+
 =head2 Performance
 
 =head3 Choppy scrolling
