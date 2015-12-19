@@ -1,0 +1,14 @@
+=head1 AppArmor on Ubuntu
+
+Due to a sever case of mental retardation in the Canonical teams, Ubuntu
+enables AppArmor protection on CUPS despite knowing very well that it
+will prevent some (many) printers from working correctly.
+
+=head2 Disabling AppArmor on CUPS
+
+  sudo apt-get install apparmor-utils
+  
+  sudo aa-complain cupsd
+
+Source: L<Ubuntu Wiki|https://wiki.ubuntu.com/DebuggingPrintingProblems#AppArmor_Protection_of_the_printing_system>
+
