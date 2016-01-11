@@ -1,0 +1,94 @@
+=head1 C Programming Tricks
+
+=head2 Man pages
+
+They should always be your primary source of information, not Stackoverflow.
+
+C<man 2 <function>> : low-level, OS-specific functions
+
+C<man 3 <function>> : high-level, usually standard functions
+
+C<apropos <topic>> : look for all manpages on the given topic
+
+=head2 Data Types
+
+Stop using C<long int> or C<long long int>. This is not portable. For example,
+Windows use 32 bits for C<long int> whereas the rest of the world uses 64 bits.
+Include C<<stdint.h>> in all your programs and use C<int64_t> or C<uint64_t>.
+
+The C<stdbool.h> header, part of the C99 standard, provides the C<bool> type
+and the values C<true> and C<false>.
+
+When specifying the length of a buffer or an array, avoid using C<int>. There
+is a type dedicated for this usage: C<size_t>. You can print a C<size_t>
+variable with C<printf> using the specifier C<%zu>. The specifier for
+C<ssize_t> (signed) would be C<%zi>.
+
+=head2 Compilers
+
+L<GCC|https://gcc.gnu.org/> - It just works
+
+L<LLVM|http://clang.llvm.org/> - Fancy features
+
+L<TCC|http://repo.or.cz/w/tinycc.git> - #!/usr/bin/tcc -run
+
+L<PCC|http://pcc.ludd.ltu.se/> - We are still waiting for it
+
+L<8cc|https://github.com/rui314/8cc/> - Useless but small and clean code
+
+L<cparser/libfirm|https://github.com/MatzeB/cparser> - Big potential
+
+=head2 GCC Options
+
+To show the list of GCC's builtin definitions you can use:
+
+  echo | gcc -E -dM -
+
+By default, newer versions of GCC read your source files as UTF-8. You can
+enforce this behaviour with the options C<-finput-charset=UTF-8> and
+C<-fexec-charset=UTF-8>.
+
+The recommended optimization level of GCC is C<-O2>. You can try using C<-O3>
+if your program is complex and does a lot of math. But be careful! There are
+cases where -O3 programs end up being slower than with -O2. You have to test
+before choosing one or the other. Besides, -O3 increases the chances of GCC
+making optimization mistakes which can make your program produce invalid
+results.
+
+When compiling with -O2 or above, you might want to add
+C<-fno-strict-aliasing> behind, unless you are sure your pointers will always
+point to the same type as the one they (the pointers) were defined with.
+
+  #include <stdio.h>
+
+  int main(void) {
+    int i = 8;
+    float f = (float *)&i;
+
+    printf("i=%i\n", i);
+
+    *f = 0.;
+    printf("i=%i\n", i);
+
+    return 0;
+  }
+
+In this (stupid) example, you would expect the first printf to show i=8 and
+the second one i=0. Let's see :
+
+  gcc test.c && ./a.out
+  i=8
+  i=0
+
+  gcc -O2 test.c && ./a.out
+  i=8
+  i=8    # wtf?
+
+  # We must disable the strict aliasing optimization
+  gcc -O2 -fno-strict-aliasing test.c && ./a.out
+  i=8
+  i=0
+
+
+
+
