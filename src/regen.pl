@@ -6,6 +6,7 @@
 #  - add a -f option to rebuild everything
 #
 
+# All these are in core starting with perl v5.18
 use strict;
 use warnings;
 use feature 'say';
@@ -33,6 +34,8 @@ sub new_psx {
 	$psx->default_title('Untitled');
 	$psx->html_doctype('<!DOCTYPE html>');
 	$psx->html_header_tags('<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <link rel="stylesheet" href="'.STYLE.'" type="text/css">
 <link rel="stylesheet" href="static/tomorrow-night-eighties.css">
 <script src="static/highlight-8.6.min.js"></script>');
@@ -168,11 +171,11 @@ sub build_index {
 	$html =~ s/vvTITLEvv/$title/g;
 	$html =~ s/vvSTYLEvv/$style/;
 
-	my $index = "<ul>\n";
+	my $index = '';
 	for my $title (sort { lc($a) cmp lc($b) } keys %index) {
-		$index .= "  <li><a href=\"$index{$title}\" title=\"$title\">$title</a></li>\n";
+		$index .= "      <li><a href=\"$index{$title}\" title=\"$title\">$title</a></li>\n";
 	}
-	$index .= "</ul>\n";
+	chop $index;
 
 	$html =~ s/vvINDEXvv/$index/;
 
