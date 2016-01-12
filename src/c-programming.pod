@@ -22,7 +22,7 @@ and the values C<true> and C<false>.
 When specifying the length of a buffer or an array, avoid using C<int>. There
 is a type dedicated for this usage: C<size_t>. You can print a C<size_t>
 variable with C<printf> using the specifier C<%zu>. The specifier for
-C<ssize_t> (signed) would be C<%zi>.
+C<ssize_t> (signed) would be C<%zd>.
 
 =head2 Compilers
 
@@ -47,6 +47,8 @@ To show the list of GCC's builtin definitions you can use:
 By default, newer versions of GCC read your source files as UTF-8. You can
 enforce this behaviour with the options C<-finput-charset=UTF-8> and
 C<-fexec-charset=UTF-8>.
+
+Most of the options below also work with C<clang>.
 
 The recommended optimization level of GCC is C<-O2>. You can try using C<-O3>
 if your program is complex and does a lot of math. But be careful! There are
@@ -74,7 +76,7 @@ point to the same type as the one they (the pointers) were defined with.
   }
 
 In this (stupid) example, you would expect the first printf to show i=8 and
-the second one i=0. Let's see :
+the second one i=0. Let's see:
 
   gcc test.c && ./a.out
   i=8
@@ -89,6 +91,25 @@ the second one i=0. Let's see :
   i=8
   i=0
 
+To force GCC to show all warnings: C<-Wall -Wextra -pedantic>. To treat
+warnings as error: C<-Werror> and to stop the compilation after the first
+error: C<-Wfatal-errors>.
 
+To optimize for the host architecture: C<-march=native -mtune=native>. To be
+more generic, you could limit yourself to C<-msse2> or C<-msse4.2>.
+By the way, you can see what optimizations activated for a given
+architecture with:
 
+  gcc -march=native -Q --help=target
 
+L<Liste of GCC X86 sub-arch|https://gcc.gnu.org/onlinedocs/gcc/x86-Options.html#x86-Options>
+
+Since GCC 4.8, a new optimization level is available: C<-Og>. This produces
+binaries optimized for debugging, but still more performant than C<-O0>. It
+also compiles very fast. Note that you still need to add C<-g> for the
+debugging symbols.
+
+To speedup compilation, the C<-pipe> will prevent GCC from creating temporary
+files, but will consume more memory instead.
+
+L<LTO optimization for GCC|https://gcc.gnu.org/onlinedocs/gccint/LTO-Overview.html>
