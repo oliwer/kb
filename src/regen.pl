@@ -13,6 +13,7 @@ use autodie;
 use FindBin;
 use File::Copy;
 use File::Spec::Functions;
+use List::Util 'first';
 use Pod::Simple::XHTML 3.28;
 
 use constant {
@@ -37,7 +38,8 @@ sub new_psx {
 <script src="static/highlight-8.6.min.js"></script>');
 	$psx->html_footer('
 <div id="footer">
-	<a href="./" alt="Back to Index"><i>Back to Index</i></a>
+	<div class="left"><a href="./" alt="Back to Index">Back to Index</a></div>
+	<div class="right">Last Modified: vvLASTMODvv</div>
 </div>
 <script>hljs.initHighlightingOnLoad();</script>
 </body>
@@ -81,15 +83,12 @@ sub spurt {
 sub find_ext {
 	my $filename = shift;
 
-	my ($ext) = $filename =~ /\.([a-zA-Z0-9]+)$/;
-	return undef unless $ext;
+	my ($ext) = $filename =~ /\.([a-zA-Z0-9]+)$/
+		or return undef;
 
-	# Is this a supported file format?
-	if ($ext =~ /^txt|pod|html$/i) {
-		return lc($ext);
-	}
+	$ext = lc $ext;
 
-	return undef;
+	first { $_ eq $ext } qw(txt pod html);
 }
 
 #
@@ -118,7 +117,7 @@ sub gen_txt {
 #
 # Handle .html documents - we just copy them to PUBDIR
 #
-sub gen_html { goto gen_txt }
+sub gen_html { goto &gen_txt }
 
 #
 # Handle POD documents with Pod::Simple. Generates html.
@@ -143,6 +142,9 @@ sub gen_pod {
 
 	$psx->parse_string_document($pod);
 	$psx->scream();
+
+	my $lastmod = localtime((stat $podfile)[9]);
+	$output =~ s/vvLASTMODvv/$lastmod/;
 
 	my $htmlfile = remove_ext($podfile) . '.html';
 	spurt($output, catfile(PUBDIR, $htmlfile));
