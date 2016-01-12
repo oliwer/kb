@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Knowledge Base / AppArmor on Ubuntu</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="static/classy.css" type="text/css">
+<link rel="stylesheet" href="static/tomorrow-night-eighties.css">
+<script src="static/highlight-8.6.min.js"></script>
+</head>
+<body>
+
+
+<h1 id="AppArmor-on-Ubuntu">AppArmor on Ubuntu</h1>
+
+<p>Due to a sever case of mental retardation in the Canonical teams, Ubuntu enables AppArmor protection on CUPS despite knowing very well that it will prevent some (many) printers from working correctly.</p>
+
+<h2 id="Disabling-AppArmor-on-CUPS">Disabling AppArmor on CUPS</h2>
+
+<pre><code>  sudo apt-get install apparmor-utils
+  
+  sudo aa-complain cupsd</code></pre>
+
+<p>Source: <a href="https://wiki.ubuntu.com/DebuggingPrintingProblems#AppArmor_Protection_of_the_printing_system">Ubuntu Wiki</a></p>
+
+
+<div id="footer">
+	<div class="left"><a href="./" alt="Back to Index">Back to Index</a></div>
+	<div class="right">Last Modified: Mon Jan 11 12:47:39 2016</div>
+</div>
+<script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>
+

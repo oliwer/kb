@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Knowledge Base / C Programming Tricks</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="static/classy.css" type="text/css">
+<link rel="stylesheet" href="static/tomorrow-night-eighties.css">
+<script src="static/highlight-8.6.min.js"></script>
+</head>
+<body>
+
+
+<h1 id="C-Programming-Tricks">C Programming Tricks</h1>
+
+<h2 id="Man-pages">Man pages</h2>
+
+<p>They should always be your primary source of information, not Stackoverflow.</p>
+
+<p><code>man 2 &lt;function</code>&gt; : low-level, OS-specific functions</p>
+
+<p><code>man 3 &lt;function</code>&gt; : high-level, usually standard functions</p>
+
+<p><code>apropos &lt;topic</code>&gt; : look for all manpages on the given topic</p>
+
+<h2 id="Data-Types">Data Types</h2>
+
+<p>Stop using <code>long int</code> or <code>long long int</code>. This is not portable. For example, Windows use 32 bits for <code>long int</code> whereas the rest of the world uses 64 bits. Include <code>&lt;stdint.h</code>&gt; in all your programs and use <code>int64_t</code> or <code>uint64_t</code>.</p>
+
+<p>The <code>stdbool.h</code> header, part of the C99 standard, provides the <code>bool</code> type and the values <code>true</code> and <code>false</code>.</p>
+
+<p>When specifying the length of a buffer or an array, avoid using <code>int</code>. There is a type dedicated for this usage: <code>size_t</code>. You can print a <code>size_t</code> variable with <code>printf</code> using the specifier <code>%zu</code>. The specifier for <code>ssize_t</code> (signed) would be <code>%zd</code>.</p>
+
+<h2 id="Compilers">Compilers</h2>
+
+<p><a href="https://gcc.gnu.org/">GCC</a> - It just works</p>
+
+<p><a href="http://clang.llvm.org/">LLVM</a> - Fancy features</p>
+
+<p><a href="http://repo.or.cz/w/tinycc.git">TCC</a> - #!/usr/bin/tcc -run</p>
+
+<p><a href="http://pcc.ludd.ltu.se/">PCC</a> - We are still waiting for it</p>
+
+<p><a href="https://github.com/rui314/8cc/">8cc</a> - Useless but small and clean code</p>
+
+<p><a href="https://github.com/MatzeB/cparser">cparser/libfirm</a> - Big potential</p>
+
+<h2 id="GCC-Options">GCC Options</h2>
+
+<p>To show the list of GCC&#39;s builtin definitions you can use:</p>
+
+<pre><code>  echo | gcc -E -dM -</code></pre>
+
+<p>By default, newer versions of GCC read your source files as UTF-8. You can enforce this behaviour with the options <code>-finput-charset=UTF-8</code> and <code>-fexec-charset=UTF-8</code>.</p>
+
+<p>Most of the options below also work with <code>clang</code>.</p>
+
+<p>The recommended optimization level of GCC is <code>-O2</code>. You can try using <code>-O3</code> if your program is complex and does a lot of math. But be careful! There are cases where -O3 programs end up being slower than with -O2. You have to test before choosing one or the other. Besides, -O3 increases the chances of GCC making optimization mistakes which can make your program produce invalid results.</p>
+
+<p>When compiling with -O2 or above, you might want to add <code>-fno-strict-aliasing</code> behind, unless you are sure your pointers will always point to the same type as the one they (the pointers) were defined with.</p>
+
+<pre><code>  #include &lt;stdio.h&gt;
+
+  int main(void) {
+    int i = 8;
+    float f = (float *)&amp;i;
+
+    printf(&quot;i=%i\n&quot;, i);
+
+    *f = 0.;
+    printf(&quot;i=%i\n&quot;, i);
+
+    return 0;
+  }</code></pre>
+
+<p>In this (stupid) example, you would expect the first printf to show i=8 and the second one i=0. Let&#39;s see:</p>
+
+<pre><code>  gcc test.c &amp;&amp; ./a.out
+  i=8
+  i=0
+
+  gcc -O2 test.c &amp;&amp; ./a.out
+  i=8
+  i=8    # wtf?
+
+  # We must disable the strict aliasing optimization
+  gcc -O2 -fno-strict-aliasing test.c &amp;&amp; ./a.out
+  i=8
+  i=0</code></pre>
+
+<p>To force GCC to show all warnings: <code>-Wall -Wextra -pedantic</code>. To treat warnings as error: <code>-Werror</code> and to stop the compilation after the first error: <code>-Wfatal-errors</code>.</p>
+
+<p>To optimize for the host architecture: <code>-march=native -mtune=native</code>. To be more generic, you could limit yourself to <code>-msse2</code> or <code>-msse4.2</code>. By the way, you can see what optimizations activated for a given architecture with:</p>
+
+<pre><code>  gcc -march=native -Q --help=target</code></pre>
+
+<p><a href="https://gcc.gnu.org/onlinedocs/gcc/x86-Options.html#x86-Options">Liste of GCC X86 sub-arch</a></p>
+
+<p>Since GCC 4.8, a new optimization level is available: <code>-Og</code>. This produces binaries optimized for debugging, but still more performant than <code>-O0</code>. It also compiles very fast. Note that you still need to add <code>-g</code> for the debugging symbols.</p>
+
+<p>To speedup compilation, the <code>-pipe</code> will prevent GCC from creating temporary files, but will consume more memory instead.</p>
+
+<p><a href="https://gcc.gnu.org/onlinedocs/gccint/LTO-Overview.html">LTO optimization for GCC</a></p>
+
+
+<div id="footer">
+	<div class="left"><a href="./" alt="Back to Index">Back to Index</a></div>
+	<div class="right">Last Modified: Tue Jan 12 12:04:25 2016</div>
+</div>
+<script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>
+
