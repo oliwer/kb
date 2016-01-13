@@ -113,3 +113,8 @@ To speedup compilation, the C<-pipe> will prevent GCC from creating temporary
 files, but will consume more memory instead.
 
 L<LTO optimization for GCC|https://gcc.gnu.org/onlinedocs/gccint/LTO-Overview.html>
+
+=head2 Useful macros
+
+  #define ASSIGN_BY_REF(_p,_value) \
+    do { if (_p) *_p = _value; } while (0)
