@@ -97,11 +97,7 @@ sub find_ext {
 #
 # Return a filename without its extention
 #
-sub remove_ext {
-	my $filename = shift;
-	$filename =~ s/(\.\w+)$//;
-	return $filename;
-}
+sub no_ext { (split /\./, shift)[0] }
 
 #
 # Handle .txt documents - we just copy them to PUBDIR
@@ -109,12 +105,12 @@ sub remove_ext {
 sub gen_txt {
 	my $filename = shift;
 
-	say " => $filename";
+	say " + $filename";
 
 	copy $filename, catfile(PUBDIR, $filename) or
 		die "could not copy '$filename' : $!\n";
 
-	$index{remove_ext($filename)} = $filename;
+	$index{no_ext($filename)} = $filename;
 }
 
 #
@@ -128,7 +124,7 @@ sub gen_html { goto &gen_txt }
 sub gen_pod {
 	my $podfile = shift;
 
-	say " => $podfile";
+	say " + $podfile";
 
 	my $psx = new_psx();
 
@@ -149,13 +145,13 @@ sub gen_pod {
 	my $lastmod = localtime((stat $podfile)[9]);
 	$output =~ s/vvLASTMODvv/$lastmod/;
 
-	my $htmlfile = remove_ext($podfile) . '.html';
+	my $htmlfile = no_ext($podfile) . '.html';
 	spurt($output, catfile(PUBDIR, $htmlfile));
 
 	if ($title) {
 		$index{$title} = $htmlfile;
 	} else {
-		$index{remove_ext($htmlfile)} = $htmlfile;
+		$index{no_ext($htmlfile)} = $htmlfile;
 	}
 }
 

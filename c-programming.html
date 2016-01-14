@@ -103,10 +103,15 @@
 
 <p><a href="https://gcc.gnu.org/onlinedocs/gccint/LTO-Overview.html">LTO optimization for GCC</a></p>
 
+<h2 id="Useful-macros">Useful macros</h2>
+
+<pre><code>  #define ASSIGN_BY_REF(_p,_value) \
+    do { if (_p) *_p = _value; } while (0)</code></pre>
+
 
 <div id="footer">
 	<div class="left"><a href="./" alt="Back to Index">Back to Index</a></div>
-	<div class="right">Last Modified: Tue Jan 12 12:04:25 2016</div>
+	<div class="right">Last Modified: Thu Jan 14 16:28:50 2016</div>
 </div>
 <script>hljs.initHighlightingOnLoad();</script>
 </body>
