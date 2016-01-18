@@ -118,3 +118,10 @@ L<LTO optimization for GCC|https://gcc.gnu.org/onlinedocs/gccint/LTO-Overview.ht
 
   #define ASSIGN_BY_REF(_p,_value) \
     do { if (_p) *_p = _value; } while (0)
+
+=head2 Links
+
+L<Be careful with realloc|https://github.com/Tarsnap/libcperciva/commit/cabe5fca76f6c38f872ea4a5967458e6f3bfe054>
+
+L<Some good data structures|https://github.com/Tarsnap/libcperciva/tree/master/datastruct>
+
