@@ -125,3 +125,5 @@ L<Be careful with realloc|https://github.com/Tarsnap/libcperciva/commit/cabe5fca
 
 L<Some good data structures|https://github.com/Tarsnap/libcperciva/tree/master/datastruct>
 
+L<Important security advices|http://blog.erratasec.com/2016/01/some-notes-c-in-2016.html>
+
